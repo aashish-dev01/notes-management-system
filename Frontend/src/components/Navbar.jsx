@@ -1,49 +1,15 @@
 import React from 'react'
-import { Link, useNavigate } from "react-router-dom";
+import { Link,  } from "react-router-dom";
 import { useAuth } from "../context/Authcontext";
-import Swal from 'sweetalert2';
-import { useTheme } from "../context/ThemeContext";
 
 const Navbar = () => {
 
-  const { user, logoutUser } = useAuth();
-  const { darkMode, toggleTheme } = useTheme();
-
-  const navigate = useNavigate();
-
-  const handleLogout = async () => {
-
-    const result = await Swal.fire({
-      title: "Are you sure?",
-      text: "You will Logout.",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#dc2626",
-      cancelButtonColor: "#6b7280",
-      confirmButtonText: "Logout",
-      cancelButtonText: "Cancel",
-    });
-
-    if (!result.isConfirmed) return;
-
-
-    try {
-      await logoutUser();
-      navigate("/");
-
-    } catch (error) {
-      console.log(error);
-
-
-    }
-
-
-  };
+  const { user, } = useAuth();
 
   return (
     <>
-      <nav className="bg-violet-100 shadow-xl min-w-2xl m-1">
-        <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center sticky top-0 z-50">
+      <nav className="bg-violet-100 shadow-xl w-full m-1">
+        <div className="max-w-7xl mx-auto px-2 py-2 flex justify-between items-center sticky top-0 z-50 md:px-4 md:py-4">
 
           <Link
             to="/"
@@ -53,8 +19,8 @@ const Navbar = () => {
              </Link>
 
           {user ? (
-            <div className="flex items-center gap-4">
-              <p className="text-gray-700 capitalize font-bold  ">
+            <div className=" flex items-center gap-4 md">
+              <p className="text-gray-700 capitalize font-bold ">
                 Hi, {user.name}
               </p>
 
@@ -76,12 +42,7 @@ const Navbar = () => {
                 Dashboard
               </Link>
 
-              <button
-                onClick={handleLogout}
-                className="bg-red-500 text-white px-4 py-2 rounded-lg font-medium hover:bg-red-600 transition duration-300 cursor-pointer"
-              >
-                Logout
-              </button>
+            
 
             </div>
           ) : (

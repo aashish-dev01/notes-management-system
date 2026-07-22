@@ -1,6 +1,8 @@
 import React from "react";
 import { useAuth } from "../context/Authcontext";
 import Navbar from "../components/Navbar";
+import Swal from 'sweetalert2';
+import {useNavigate} from "react-router-dom";
 import {
   FaUserCircle,
   FaUser,
@@ -9,13 +11,44 @@ import {
 } from "react-icons/fa";
 
 const Profile = () => {
-  const { user } = useAuth();
+  const { user , logoutUser } = useAuth();
+
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "You will Logout.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#dc2626",
+      cancelButtonColor: "#6b7280",
+      confirmButtonText: "Logout",
+      cancelButtonText: "Cancel",
+    });
+
+    if (!result.isConfirmed) return;
+
+
+    try {
+      await logoutUser();
+      navigate("/");
+
+    } catch (error) {
+      console.log(error);
+
+
+    }
+
+
+  };
 
   return (
     <>
       <Navbar />
 
-      <div className="min-h-screen bg-slate-100 py-10 px-4 min-w-2xl">
+      <div className="min-h-screen bg-slate-100 py-10 px-4">
 
         <div className="max-w-xl mx-auto bg-white rounded-3xl shadow-lg overflow-hidden">
 
@@ -97,6 +130,12 @@ const Profile = () => {
               <FaPen />
               Edit Profile (Coming Soon)
             </button>
+              <button
+                onClick={handleLogout}
+                className="bg-red-500 w-full text-white px-4 py-2 rounded-lg font-medium hover:bg-red-600 transition duration-300 cursor-pointer"
+              >
+                Logout
+              </button>
 
           </div>
 
