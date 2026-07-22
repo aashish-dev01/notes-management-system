@@ -7,76 +7,76 @@ import { useTheme } from "../context/ThemeContext";
 const Navbar = () => {
 
   const { user, logoutUser } = useAuth();
-  const {darkMode,toggleTheme} = useTheme();
+  const { darkMode, toggleTheme } = useTheme();
 
   const navigate = useNavigate();
 
   const handleLogout = async () => {
 
-     const result = await Swal.fire({
-                    title: "Are you sure?",
-                    text: "You will Logout.",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#dc2626",
-                    cancelButtonColor: "#6b7280",
-                    confirmButtonText: "Logout",
-                    cancelButtonText: "Cancel",
-                });
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "You will Logout.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#dc2626",
+      cancelButtonColor: "#6b7280",
+      confirmButtonText: "Logout",
+      cancelButtonText: "Cancel",
+    });
 
-     if (!result.isConfirmed) return;
+    if (!result.isConfirmed) return;
 
-    
-   try{
+
+    try {
       await logoutUser();
-     navigate("/");
+      navigate("/");
 
-   } catch(error){
-    console.log(error);
-    
+    } catch (error) {
+      console.log(error);
 
-   }
-    
+
+    }
+
 
   };
 
   return (
     <>
-      <nav className="bg-slate-50 shadow-md ">
-        <div className="max-w-8xl mx-auto px-4 py-4 flex justify-between items-center sticky top-0 z-50">
+      <nav className="bg-violet-100 shadow-xl min-w-2xl m-1">
+        <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center sticky top-0 z-50">
 
           <Link
             to="/"
-            className="text-2xl font-bold text-violet-600"
+            className="text-2xl font-bold text-violet-600 "
           >
-            My App
-          </Link>
+            Home         
+             </Link>
 
           {user ? (
             <div className="flex items-center gap-4">
-              <p className="text-gray-700 capitalize ">
+              <p className="text-gray-700 capitalize font-bold  ">
                 Hi, {user.name}
               </p>
 
-             
+
 
               <Link
-              className="bg-violet-500 text-white px-4 py-2 rounded-lg font-medium hover:bg-violet-600 transition duration-300 cursor-pointer"
+                className="bg-violet-500 text-white px-4 py-2 rounded-lg font-medium hover:bg-violet-600 transition duration-300 cursor-pointer"
 
-              to="/profile"
+                to="/profile"
               >
-                 Profile    
+                Profile
               </Link>
 
               <Link
-              className="bg-violet-500 text-white px-4 py-2 rounded-lg font-medium hover:bg-violet-600 transition duration-300 cursor-pointer"
+                className="bg-violet-500 text-white px-4 py-2 rounded-lg font-medium hover:bg-violet-600 transition duration-300 cursor-pointer"
 
-              to="/Dashboard"
+                to="/Dashboard"
               >
-                 Dashboard    
+                Dashboard
               </Link>
 
-               <button
+              <button
                 onClick={handleLogout}
                 className="bg-red-500 text-white px-4 py-2 rounded-lg font-medium hover:bg-red-600 transition duration-300 cursor-pointer"
               >

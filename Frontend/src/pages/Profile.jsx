@@ -15,7 +15,7 @@ const Profile = () => {
     <>
       <Navbar />
 
-      <div className="min-h-screen bg-slate-100 py-10 px-4">
+      <div className="min-h-screen bg-slate-100 py-10 px-4 min-w-2xl">
 
         <div className="max-w-xl mx-auto bg-white rounded-3xl shadow-lg overflow-hidden">
 

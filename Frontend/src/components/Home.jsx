@@ -54,7 +54,7 @@ const Home = () => {
 
       <Navbar/>
 
-       <div className="bg-slate-50 min-h-screen">
+       <div className="bg-slate-100 min-h-screen min-w-2xl">
 
       {/* Hero */}
       <section className="max-w-6xl mx-auto px-6 py-20 text-center">

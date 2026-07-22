@@ -37,9 +37,11 @@ const Dashboard = () => {
 
     if (loading) {
         return (
-            <h2 className="text-center text-xl mt-10">
+            
+            <h2 className="text-center font-bold text-xl mt-10">
                 Loading...
             </h2>
+           
         );
     }
 
