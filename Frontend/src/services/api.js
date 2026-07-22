@@ -2,7 +2,7 @@ import axios from "axios";
 
 const api = axios.create({
 
-    baseURL : "https://notes-management-system-vs6k.onrender.com",
+    baseURL : "https://notes-management-system-vs6k.onrender.com/Api",
 
     withCredentials : true
 
