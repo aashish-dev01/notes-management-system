@@ -5,10 +5,10 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import router from "./routes/userRoutes.js";
 import nrouter from "./routes/noteRoutes.js"
+import googleAuthRouter from "./routes/googleAuthRoutes.js";
 
 dotenv.config(); // for read our .env file with process.env keyword
 connectDB();     // connect database
-
 const PORT = process.env.PORT || 3000; 
 const app = express(); 
 
@@ -18,6 +18,7 @@ app.use(express.urlencoded({ extended: true })); // parse html form data
 app.use(cookieParser());   // Cookies ko req.cookies me read karne ke liye.
 app.use("/Api" ,router)  // / ke baad sare routes router se chalao
 app.use("/Api/notes", nrouter);
+app.use("/Api/auth", googleAuthRouter);
 
 app.listen(PORT, ()=>{
     console.log(`server is running on port ${PORT}`);

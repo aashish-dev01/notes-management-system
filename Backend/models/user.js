@@ -17,8 +17,18 @@ const userSchema = new mongoose.Schema({
 
     password: {
         type: String,
-        required: true,
         minlength: 8
+    },
+      googleId: {
+        type: String,
+        unique: true,
+        sparse: true
+    },
+
+    authProvider: {
+        type: String,
+        enum: ["local", "google"],
+        default: "local"
     }
 
 })
@@ -28,7 +38,7 @@ const userSchema = new mongoose.Schema({
 
 userSchema.pre("save", async function(){
 
-    if(!this.isModified("password")){ // if entered pass is same do nothing
+    if(!this.password || !this.isModified("password")){ // if entered pass is same do nothing
         return;
     }
 
@@ -39,6 +49,10 @@ userSchema.pre("save", async function(){
 // Compare user entred password with our hash password
 
 userSchema.methods.comparePassword = async function(password){
+    
+     if (!this.password) {
+        return false;
+    }
     return await bcrypt.compare(password,this.password)
     // here password is user entred pass and this.password is stored password
 }
